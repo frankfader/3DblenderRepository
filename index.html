@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ads4D | High-Performance 3D Visuals</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-dark: #030014;
+            --bg-card: #0f1021;
+            --primary: #8b5cf6;
+            --primary-glow: #7c3aed;
+            --secondary: #ec4899;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --border: rgba(255, 255, 255, 0.08);
+            --glass: rgba(255, 255, 255, 0.03);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(139, 92, 246, 0.08), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(236, 72, 153, 0.08), transparent 25%);
+        }
+
+        /* Utilities */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #fff 30%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 80px;
+        }
+
+        .section-header h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 42px;
+            margin-bottom: 16px;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 18px;
+        }
+
+        /* Header */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            background: rgba(3, 0, 20, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Outfit', sans-serif;
+            font-size: 26px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo i {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 180px 0 100px;
+            text-align: center;
+            position: relative;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 50px;
+            color: var(--primary);
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 32px;
+        }
+
+        .hero h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 72px;
+            line-height: 1.1;
+            font-weight: 800;
+            margin-bottom: 24px;
+            letter-spacing: -2px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 48px;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 16px 36px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--text-main);
+            color: var(--bg-dark);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(255,255,255,0.3);
+        }
+
+        .btn-secondary {
+            background: var(--glass);
+            color: white;
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: white;
+        }
+
+        /* Trusted By Strip */
+        .logos {
+            padding: 60px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            background: rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .logo-scroll {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 40px;
+            opacity: 0.5;
+            filter: grayscale(100%);
+        }
+
+        .logo-item {
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+        }
+
+        /* Features */
+        .features {
+            padding: 120px 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 40px;
+            border-radius: 24px;
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .icon-box {
+            width: 50px;
+            height: 50px;
+            background: rgba(139, 92, 246, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 20px;
+            margin-bottom: 24px;
+        }
+
+        .feature-card h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 15px;
+        }
+
+        /* Portfolio */
+        .portfolio {
+            padding: 100px 0;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 32px;
+        }
+
+        .work-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            position: relative;
+            group: cursor;
+        }
+
+        .media-wrapper {
+            position: relative;
+            width: 100%;
+            height: 350px;
+            background: #1a1a1a;
+            overflow: hidden;
+        }
+
+        .media-wrapper img, 
+        .media-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .work-card:hover .media-wrapper img,
+        .work-card:hover .media-wrapper video {
+            transform: scale(1.05);
+        }
+
+        .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 30px;
+            background: linear-gradient(to top, rgba(3,0,20,0.9), transparent);
+            z-index: 2;
+        }
+
+        .tag {
+            font-size: 12px;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        /* About/Stats */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            padding: 100px 0;
+        }
+
+        .about-image-wrapper {
+            position: relative;
+        }
+
+        .about-img {
+            width: 100%;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+        }
+
+        .stat-box {
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--primary);
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        /* CTA */
+        .cta-section {
+            padding: 100px 0;
+            text-align: center;
+            background: linear-gradient(180deg, transparent 0%, rgba(139, 92, 246, 0.05) 100%);
+        }
+
+        .cta-card {
+            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+            border-radius: 30px;
+            padding: 80px 40px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 60px 0 30px;
+            background: #02000d;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .social-links a {
+            color: var(--text-muted);
+            margin-left: 20px;
+            font-size: 20px;
+            transition: 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            color: #475569;
+            font-size: 14px;
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 48px; }
+            .nav-links { display: none; }
+            .about-grid { grid-template-columns: 1fr; }
+            .stat-box { position: static; margin-top: 20px; display: inline-block; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-content">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-cube"></i> ADS4D
+            </a>
+            <div class="nav-links">
+                <a href="#work">Work</a>
+                <a href="#features">Services</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <a href="mailto:your-email@example.com" class="btn btn-primary" style="padding: 10px 20px; font-size: 14px;">Let's Talk</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="badge">
+                <i class="fa-solid fa-bolt"></i> Elevate your ROI
+            </div>
+            <h1>Make Your Products <br><span class="gradient-text">Impossible to Ignore</span></h1>
+            <p>We craft premium 3D visuals and motion design that stop the scroll, build authority, and convert passive browsers into loyal customers.</p>
+            <div class="cta-group">
+                <a href="#contact" class="btn btn-primary">Start Project <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="#work" class="btn btn-secondary">View Showreel</a>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Trusted By / Social Proof -->
+    <section class="logos">
+        <div class="container">
+            <p style="text-align: center; color: var(--text-muted); margin-bottom: 20px; font-size: 14px; letter-spacing: 1px; text-transform: uppercase;">Trusted by emerging DTC Brands</p>
+            
+        </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Top Brands Choose Us</h2>
+                <p>We don't just make things look good. We engineer visuals to perform.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="icon-box"><i class="fa-solid fa-eye"></i></div>
+                    <h3>Attention Grabbing</h3>
+                    <p>Psychologically triggered visuals designed to interrupt scrolling patterns and hook customers in 3 seconds.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-box"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                    <h3>Hyper-Realism</h3>
+                    <p>Product renderings so detailed they look better than photography, without the expensive studio costs.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-box"><i class="fa-solid fa-chart-line"></i></div>
+                    <h3>Conversion Focused</h3>
+                    <p>Every angle, light, and motion is optimized to highlight your product's value proposition.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Grid -->
+    <section id="work" class="portfolio">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured Productions</h2>
+                <p>A curated selection of high-impact visuals.</p>
+            </div>
+            
+            <div class="portfolio-grid">
+                <!-- Item 1 -->
+                <div class="work-card">
+                    <div class="media-wrapper">
+                        <!-- Updated to assets folder and .png -->
+                        <img src="assets/AIskydive.png" onerror="this.src='https://images.unsplash.com/photo-1555664424-778a69032334?q=80&w=800&auto=format&fit=crop'" alt="AI Skydive">
+                    </div>
+                    <div class="overlay">
+                        <span class="tag">Concept Art</span>
+                        <h3>AI Skydive Visualization</h3>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="work-card">
+                    <div class="media-wrapper">
+                        <!-- Updated to assets folder and .png -->
+                        <img src="assets/EsteeLauder.png" onerror="this.src='https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?q=80&w=800&auto=format&fit=crop'" alt="Beauty Product">
+                    </div>
+                    <div class="overlay">
+                        <span class="tag">Cosmetics</span>
+                        <h3>Estée Lauder Campaign</h3>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="work-card">
+                    <div class="media-wrapper">
+                        <!-- Updated to assets folder and .png -->
+                        <img src="assets/Inssta360.png" onerror="this.src='https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?q=80&w=800&auto=format&fit=crop'" alt="Tech Product">
+                    </div>
+                    <div class="overlay">
+                        <span class="tag">Tech</span>
+                        <h3>Insta360 Reveal</h3>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="work-card">
+                    <div class="media-wrapper">
+                        <!-- Updated to assets folder and .png -->
+                        <img src="assets/Lancaster.png" onerror="this.src='https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=800&auto=format&fit=crop'" alt="Lancaster">
+                    </div>
+                    <div class="overlay">
+                        <span class="tag">Luxury</span>
+                        <h3>Lancaster Serum</h3>
+                    </div>
+                </div>
+
+                 <!-- Video Item 1 -->
+                 <div class="work-card">
+                    <div class="media-wrapper">
+                        <video controls poster="https://via.placeholder.com/800x600/1a1a1a/ffffff?text=Video+Thumbnail">
+                            <source src="assets/video1.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="overlay">
+                        <span class="tag">Motion Design</span>
+                        <h3>Dynamic Product Animation</h3>
+                    </div>
+                </div>
+
+                <!-- Video Item 2 -->
+                <div class="work-card">
+                    <div class="media-wrapper">
+                        <video controls poster="https://via.placeholder.com/800x600/1a1a1a/ffffff?text=Video+Thumbnail">
+                            <source src="assets/video3.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="overlay">
+                        <span class="tag">AI Generation</span>
+                        <h3>Next-Gen AI Video</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image-wrapper">
+                    <!-- Updated to assets folder and .png -->
+                    <img src="assets/me.png" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop'" alt="Profile" class="about-img">
+                    <div class="stat-box">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Assets Delivered</div>
+                    </div>
+                </div>
+                <div class="about-content">
+                    <span style="color: var(--primary); font-weight: 600; letter-spacing: 1px;">BEHIND THE PIXELS</span>
+                    <h2 style="font-family: 'Outfit'; font-size: 40px; margin: 15px 0 20px;">Built for Performance,<br>Designed for Sales.</h2>
+                    <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 18px;">
+                        I don't just create pretty pictures. I create assets that drive the bottom line. 
+                        In a world of infinite scrolling, your brand needs to stand out instantly.
+                    </p>
+                    <p style="color: var(--text-muted); margin-bottom: 30px;">
+                        With a focus on high-end 3D motion and AI-driven workflows, I help ecommerce brands look like market leaders.
+                    </p>
+                    <div style="display: flex; gap: 20px;">
+                        <div>
+                            <i class="fa-solid fa-check" style="color: var(--primary)"></i> 4K Quality
+                        </div>
+                        <div>
+                            <i class="fa-solid fa-check" style="color: var(--primary)"></i> Fast Turnaround
+                        </div>
+                        <div>
+                            <i class="fa-solid fa-check" style="color: var(--primary)"></i> Social Ready
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="cta-section">
+        <div class="container">
+            <div class="cta-card">
+                <h2>Ready to <span class="gradient-text">Scale Your Brand?</span></h2>
+                <p style="color: #cbd5e1; max-width: 500px; margin: 20px auto 40px;">Stop competing on price. Start competing on perception. Let's create visuals that justify your premium value.</p>
+                <div class="cta-group">
+                    <a href="mailto:your-email@example.com" class="btn btn-primary">Book a Discovery Call</a>
+                    <a href="https://wa.me/YOUR_PHONE_NUMBER" class="btn btn-secondary"><i class="fa-brands fa-whatsapp"></i> WhatsApp Me</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <a href="#" class="logo" style="font-size: 20px;">
+                    <i class="fa-solid fa-cube"></i> ADS4D
+                </a>
+                <div class="social-links">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2024 Ads4D. Premium visuals for ecommerce brands. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
